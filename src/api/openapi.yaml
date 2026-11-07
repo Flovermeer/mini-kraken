@@ -1,0 +1,34 @@
+openapi: 3.0.4
+info:
+  title: mini-kraken-api
+  description: mini-kraken-api
+  version: 0.0.1
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+components:
+  schemas:
+    Device:
+      $ref: "./components/schemas/device.yaml"
+    DiscoveredDevice:
+      $ref: "./components/schemas/discovered-device.yaml"
+    ApiError:
+      $ref: "./components/schemas/api-error.yaml"
+  responses:
+    NotFound:
+      $ref: "./components/responses/not-found.yaml"
+
+paths:
+  /photos:
+    $ref: "./paths/get-photos.yaml"
+  /photos/{id}:
+    $ref: "./paths/get-photo-by-uuid.yaml"
+  /devices:
+    $ref: "./paths/devices.yaml"
+  /devices/{id}:
+    $ref: "./paths/device.yaml"
+  /devices/discovery:
+    $ref: "./paths/discover.yaml"
+

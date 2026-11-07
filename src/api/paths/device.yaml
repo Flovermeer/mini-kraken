@@ -1,0 +1,35 @@
+parameters:
+  - in: path
+    name: id
+    schema:
+      type: string
+    required: true
+delete:
+  operationId: removeDevice
+  responses:
+    "204":
+      description: Delete successful
+    "404":
+      $ref: "../components/responses/not-found.yaml"
+patch:
+  operationId: updateDevice
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+  responses:
+    "201":
+      description: Update successful
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/device.yaml"
+    "404":
+      $ref: "../components/responses/not-found.yaml"

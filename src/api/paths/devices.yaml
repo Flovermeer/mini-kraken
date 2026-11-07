@@ -1,0 +1,37 @@
+post:
+  operationId: pairDevice
+  summary: Pair a device
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - id
+            - name
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+  responses:
+    "201":
+      description: Device paired successfully
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/device.yaml"
+    "400":
+      description: An error occurred
+get:
+  operationId: getDevices
+  responses:
+    "200":
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../components/schemas/device.yaml"

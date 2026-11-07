@@ -1,0 +1,17 @@
+type: object
+required:
+  - id
+  - name
+  - mDNS
+  - created_at
+properties:
+  id:
+    type: string
+    format: uuid
+  name:
+    type: string
+  mDNS:
+    type: string
+  created_at:
+    type: string
+    format: date-time

@@ -1,0 +1,12 @@
+get:
+  operationId: getDiscoveredDevices
+  summary: Get a list of discovered devices on the network
+  responses:
+    "200":
+      description: Devices found
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../components/schemas/discovered-device.yaml"

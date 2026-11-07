@@ -1,0 +1,14 @@
+# Dépendances
+node_modules/
+
+# Données locales : base SQLite et photos uploadées (ne pas versionner)
+data/
+uploads/
+
+# IDE
+.idea/
+.vscode/
+
+# Divers
+*.log
+.DS_Store
