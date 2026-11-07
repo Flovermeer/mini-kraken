@@ -25,10 +25,19 @@ export default async function devicesRoutes(fastify: FastifyInstance, _options: 
             body: getDevicesApiValidationSchema('/{id}', 'patch')
         }
     }, async (request, reply) => {
-        const id = request.params?.id;
+        const id = request.params.id;
         const result = deviceService.updateDevice(id, request.body.name);
         return reply.status(201).send(result);
-    })
+    });
+
+    fastify.delete<{ Params: { id: string } }>('/devices/:id', {
+       schema: {
+           response: getDevicesApiResponseSchema('/{id}', 'delete'),
+       }
+    }, async (request, reply) => {
+        deviceService.deleteDevice(request.params.id);
+        return reply.status(204).send();
+    });
 
     //#endregion
 

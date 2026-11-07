@@ -55,4 +55,10 @@ export class DeviceService {
         if (!result) throw new ModelNotFoundException(`Device with id ${id} not found`);
         return this.toDevice(result);
     }
+
+    deleteDevice(id: string) {
+        const result = this.db.prepare('DELETE FROM devices WHERE id = ?').run(id);
+        if (result.changes === 0) throw new ModelNotFoundException(`Device with id ${id} not found`);
+        return;
+    }
 }
