@@ -2,7 +2,7 @@ import SwaggerParser from "@apidevtools/swagger-parser";
 import { type OpenAPIV3 } from "openapi-types";
 
 type Method = 'get' | 'post' | 'put' | 'patch' | 'delete';
-const api = await SwaggerParser.validate('src/api/openapi.yaml') as OpenAPIV3.Document;
+const api = await SwaggerParser.validate('../openapi/openapi.yaml') as OpenAPIV3.Document;
 
 export function getApi() {
     return api;

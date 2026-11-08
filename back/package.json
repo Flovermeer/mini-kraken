@@ -9,7 +9,7 @@
     "start": "tsx src/server.ts",
     "db:migrate": "tsx src/database/migrate.ts",
     "api:validate": "tsx src/scripts/validate-openapi.ts",
-    "api:generate": "openapi-generator-cli generate -i src/api/openapi.yaml -g typescript-fetch -o src/api/generated --global-property models,modelDocs=false,modelTests=false --additional-properties=modelPropertyNaming=original,dateLibrary=string",
+    "api:generate": "openapi-generator-cli generate -i ../openapi/openapi.yaml -g typescript-fetch -o src/api/generated --global-property models,modelDocs=false,modelTests=false --additional-properties=modelPropertyNaming=original,dateLibrary=string",
     "fake:device": "tsx src/tests/fake-bonjour-service.ts",
     "test": "vitest run",
     "test:watch": "vitest"
