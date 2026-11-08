@@ -22,9 +22,9 @@ components:
 
 paths:
   /photos:
-    $ref: "./paths/get-photos.yaml"
+    $ref: "./paths/photos.yaml"
   /photos/{id}:
-    $ref: "./paths/get-photo-by-uuid.yaml"
+    $ref: "./paths/photo.yaml"
   /devices:
     $ref: "./paths/devices.yaml"
   /devices/{id}:

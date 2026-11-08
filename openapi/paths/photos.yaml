@@ -1,5 +1,6 @@
 post:
   operationId: uploadPhoto
+  tags: [Photos]
   summary: Upload a photo
   requestBody:
     required: true

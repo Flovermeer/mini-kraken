@@ -1,5 +1,6 @@
 post:
   operationId: pairDevice
+  tags: [Devices]
   summary: Pair a device
   requestBody:
     required: true
@@ -26,6 +27,7 @@ post:
       description: An error occurred
 get:
   operationId: getDevices
+  tags: [Devices]
   responses:
     "200":
       description: Successful operation

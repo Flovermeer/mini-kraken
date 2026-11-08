@@ -16,7 +16,9 @@
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "ng test --no-watch",
     "test:unit:watch": "ng test --watch",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "pregenerate:client": "node -e \"fs.rmSync('src/api', { recursive: true, force: true })\"",
+    "generate:client": "openapi-generator-cli generate --generator-key mini-kraken-api"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +34,7 @@
     "@capacitor/keyboard": "8.0.6",
     "@capacitor/status-bar": "8.0.4",
     "@ionic/angular": "^9.0.0",
+    "@openapitools/openapi-generator-cli": "^2.42.0",
     "ionicons": "^8.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"

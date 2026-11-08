@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "7.27.0",
+    "generators": {
+      "mini-kraken-api": {
+        "generatorName": "typescript-angular",
+        "inputSpec": "../openapi/openapi.yaml",
+        "output": "./src/api",
+        "additionalProperties": {
+          "modelPropertyNaming": "original"
+        }
+      }
+    }
+  }
+}

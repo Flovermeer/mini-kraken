@@ -6,6 +6,7 @@ parameters:
     required: true
 delete:
   operationId: removeDevice
+  tags: [Devices]
   responses:
     "204":
       description: Delete successful
@@ -13,6 +14,7 @@ delete:
       $ref: "../components/responses/not-found.yaml"
 patch:
   operationId: updateDevice
+  tags: [Devices]
   requestBody:
     required: true
     content:

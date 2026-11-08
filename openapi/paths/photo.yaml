@@ -1,5 +1,6 @@
 get:
   operationId: getPhotoById
+  tags: [Photos]
   summary: Get a photo by UUID
   parameters:
     - name: id
