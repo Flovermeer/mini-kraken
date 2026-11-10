@@ -1,3 +1,4 @@
+import { provideHttpClient } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
 import {
   RouteReuseStrategy,
@@ -6,7 +7,9 @@ import {
   withPreloading,
   PreloadAllModules,
 } from '@angular/router';
+import { provideApi } from '@api';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
+import { addIcons } from 'ionicons';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
@@ -16,5 +19,7 @@ bootstrapApplication(AppComponent, {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules), withComponentInputBinding()),
+    provideApi('http://localhost:3000'),
+    provideHttpClient(),
   ],
 });
