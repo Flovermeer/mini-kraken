@@ -14,6 +14,9 @@ import type { DiscoveredDevice } from '../api/generated/models/DiscoveredDevice.
  */
 function createTestDb(): DatabaseSync {
     const db = new DatabaseSync(':memory:');
+    // SQLite n'applique les clés étrangères (REFERENCES, ON DELETE RESTRICT) que si on le lui demande,
+    // et ce réglage vaut pour la connexion : à refaire à chaque ouverture, comme pour la vraie base.
+    db.exec('PRAGMA foreign_keys = ON');
     const migrationsDir = path.join(import.meta.dirname, '../database/migrations');
 
     const files = fs.readdirSync(migrationsDir)

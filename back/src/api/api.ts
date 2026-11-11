@@ -22,3 +22,14 @@ export function getDevicesApiResponseSchema(route: string, operation: Method) {
     const path = api.paths?.[`/devices${route}`];
     return path?.[operation]?.responses as OpenAPIV3.ResponsesObject | undefined;
 }
+
+export function getPlacesApiResponseSchema(route: string, operation: Method) {
+    const path = api.paths?.[`/places${route}`];
+    return path?.[operation]?.responses as OpenAPIV3.ResponsesObject | undefined;
+}
+
+export function getPlacesApiValidationSchema(route: string, operation: Method) {
+    const path = api.paths?.[`/places${route}`];
+    const body = path?.[operation]?.requestBody as OpenAPIV3.RequestBodyObject;
+    return body.content['application/json']?.schema as OpenAPIV3.SchemaObject | undefined;
+}

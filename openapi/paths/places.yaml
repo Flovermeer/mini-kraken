@@ -1,0 +1,40 @@
+get:
+  operationId: getPlaces
+  tags: [Places]
+  summary: Retrieve registered places
+  responses:
+    "200":
+      description: Places retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../components/schemas/place.yaml"
+    "400":
+      description: An error occurred
+post:
+  operationId: createPlace
+  tags: [Places]
+  summary: Create a new place
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          title: CreatePlaceRequest
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+  responses:
+    "201":
+      description: Place created
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/place.yaml"
+    "400":
+      description: An error occurred

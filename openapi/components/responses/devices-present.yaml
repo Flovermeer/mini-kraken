@@ -1,0 +1,5 @@
+description: Devices are attached
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/api-error.yaml"

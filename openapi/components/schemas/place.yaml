@@ -1,0 +1,14 @@
+type: object
+required:
+  - id
+  - name
+properties:
+  id:
+    type: string
+    format: uuid
+  name:
+    type: string
+  devices:
+    type: array
+    items:
+      $ref: "./device.yaml"

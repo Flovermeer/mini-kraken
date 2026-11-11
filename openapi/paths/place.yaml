@@ -1,0 +1,52 @@
+parameters:
+  - in: path
+    name: id
+    schema:
+      type: string
+    required: true
+get:
+  operationId: getPlace
+  tags: [ Places ]
+  responses:
+    "200":
+      description: Retrieve a place by its id
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/place.yaml"
+    "404":
+      $ref: "../components/responses/not-found.yaml"
+delete:
+  operationId: removePlace
+  tags: [ Places ]
+  responses:
+    "204":
+      description: Delete successful
+    "404":
+      $ref: "../components/responses/not-found.yaml"
+    "409":
+      $ref: "../components/responses/devices-present.yaml"
+patch:
+  operationId: updatePlace
+  tags: [ Places ]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          title: UpdatePlaceRequest
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+  responses:
+    "201":
+      description: Update successful
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/place.yaml"
+    "404":
+      $ref: "../components/responses/not-found.yaml"

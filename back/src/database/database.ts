@@ -7,6 +7,7 @@ if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
 }
 const db = new DatabaseSync(path.join(dir, 'database.db'));
+db.exec('PRAGMA foreign_keys = ON;');
 
 db.exec(`
 CREATE TABLE IF NOT EXISTS schema_migrations (

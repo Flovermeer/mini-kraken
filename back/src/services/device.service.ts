@@ -1,7 +1,6 @@
 import type {DiscoveredDevice} from "../api/generated/models/DiscoveredDevice.js";
 import type {Device} from "../api/generated/models/Device.js";
 import {randomUUID} from "node:crypto";
-import {getDb} from "../database/database.js";
 import type {DatabaseSync, SQLOutputValue} from "node:sqlite";
 import type {PairDeviceRequest} from "../api/generated/models/PairDeviceRequest.js";
 import {ModelNotFoundException} from "../exceptions/ModelNotFoundException.js";

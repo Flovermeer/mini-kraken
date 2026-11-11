@@ -14,6 +14,8 @@ components:
       $ref: "./components/schemas/device.yaml"
     DiscoveredDevice:
       $ref: "./components/schemas/discovered-device.yaml"
+    Place:
+      $ref: "./components/schemas/place.yaml"
     ApiError:
       $ref: "./components/schemas/api-error.yaml"
   responses:
@@ -31,4 +33,8 @@ paths:
     $ref: "./paths/device.yaml"
   /devices/discovery:
     $ref: "./paths/discover.yaml"
+  /places:
+    $ref: "./paths/places.yaml"
+  /places/{id}:
+    $ref: "./paths/place.yaml"
 

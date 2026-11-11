@@ -4,6 +4,7 @@ import {fastifyMultipart} from "@fastify/multipart";
 import photoRoutes from "./routes/photos.routes.js";
 import devicesRoutes from "./routes/devices.routes.js";
 import {ModelNotFoundException} from "./exceptions/ModelNotFoundException.js";
+import placesRoutes from "./routes/places.routes.js";
 
 const fastify = Fastify({
     logger: true, 
@@ -13,6 +14,7 @@ fastify.register(fastifyMultipart);
 fastify.register(cors, { origin: "*", methods: ["GET", "POST", "DELETE", "PATCH"] });
 fastify.register(photoRoutes);
 fastify.register(devicesRoutes);
+fastify.register(placesRoutes);
 
 fastify.setErrorHandler(async (error, _request, reply) => {
     if (error instanceof ModelNotFoundException) {
