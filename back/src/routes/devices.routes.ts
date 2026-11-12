@@ -5,6 +5,7 @@ import {DeviceService} from "../services/device.service.js";
 import {getDb} from "../database/database.js";
 import {getDevicesApiResponseSchema, getDevicesApiValidationSchema} from "../api/api.js";
 import type {UpdateDeviceRequest} from "../api/generated/models/UpdateDeviceRequest.js";
+import type {Device} from "../api/generated/models/Device.js";
 
 export default async function devicesRoutes(fastify: FastifyInstance, _options: FastifyPluginOptions) {
     const devicesDetectorService = new DevicesDetectorService();
@@ -26,8 +27,14 @@ export default async function devicesRoutes(fastify: FastifyInstance, _options: 
         }
     }, async (request, reply) => {
         const id = request.params.id;
-        const result = deviceService.updateDevice(id, request.body.name);
-        return reply.status(201).send(result);
+        const { name, placeId } = request.body;
+        // Le contrat impose au moins un champ (minProperties: 1) : device sera forcément défini.
+        let device: Device | undefined;
+        // Le déplacement d'abord : c'est lui qui peut échouer (lieu inexistant → clé étrangère),
+        // et on évite ainsi de renommer un cadre qu'on n'aura finalement pas pu déplacer.
+        if (placeId !== undefined) device = deviceService.attachDeviceToPlace(id, placeId);
+        if (name !== undefined) device = deviceService.updateDevice(id, name);
+        return reply.status(201).send(device);
     });
 
     fastify.delete<{ Params: { id: string } }>('/devices/:id', {
@@ -71,7 +78,7 @@ export default async function devicesRoutes(fastify: FastifyInstance, _options: 
         const filtered = deviceService.filterAlreadyPairedDevices(discovered);
         await reply.status(200).send(filtered);
     });
-//#endregion
+    //#endregion
 
     //#region PAIRED
     fastify.post<{ Body: PairDeviceRequest }>('/devices', {

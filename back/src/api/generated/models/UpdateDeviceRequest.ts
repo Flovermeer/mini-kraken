@@ -14,7 +14,7 @@
 
 import { mapValues } from '../runtime.js';
 /**
- * 
+ * Renommer et/ou déplacer un cadre. Seuls les champs envoyés sont modifiés.
  * @export
  * @interface UpdateDeviceRequest
  */
@@ -22,14 +22,17 @@ export interface UpdateDeviceRequest {
     /**
      * 
      */
-    name: string;
+    name?: string;
+    /**
+     * 
+     */
+    placeId?: string;
 }
 
 /**
  * Check if a given object implements the UpdateDeviceRequest interface.
  */
 export function instanceOfUpdateDeviceRequest(value: object): value is UpdateDeviceRequest {
-    if (!('name' in value) || value['name'] === undefined) return false;
     return true;
 }
 
@@ -43,7 +46,8 @@ export function UpdateDeviceRequestFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'name': json['name'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'placeId': json['placeId'] == null ? undefined : json['placeId'],
     };
 }
 
@@ -59,6 +63,7 @@ export function UpdateDeviceRequestToJSONTyped(value?: UpdateDeviceRequest | nul
     return {
         
         'name': value['name'],
+        'placeId': value['placeId'],
     };
 }
 

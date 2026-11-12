@@ -20,11 +20,14 @@ patch:
     content:
       application/json:
         schema:
+          title: UpdateDeviceRequest
+          description: Renommer et/ou déplacer un cadre. Seuls les champs envoyés sont modifiés.
           type: object
-          required:
-            - name
+          minProperties: 1
           properties:
             name:
+              type: string
+            placeId:
               type: string
   responses:
     "201":

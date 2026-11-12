@@ -18,7 +18,8 @@ export class DeviceService {
             id: raw.id!.toString(),
             name: raw.name!.toString(),
             mDNS: raw.mDNS!.toString(),
-            created_at: raw.created_at!.toString(),
+            placeId: raw.place_id!.toString(),
+            createdAt: raw.created_at!.toString(),
         } satisfies Device;
     }
 
@@ -29,11 +30,12 @@ export class DeviceService {
             id: uuid,
             name: discovered.name,
             mDNS: discovered.id,
-            created_at: new Date().toISOString(),
+            placeId: discovered.placeId,
+            createdAt: new Date().toISOString(),
         }
 
-        this.db.prepare('INSERT INTO devices (id, name, mDNS, created_at) VALUES (?, ?, ?, ?);')
-            .run(device.id, device.name, device.mDNS, device.created_at);
+        this.db.prepare('INSERT INTO devices (id, name, mDNS, place_id, created_at) VALUES (?, ?, ?, ?, ?);')
+            .run(device.id, device.name, device.mDNS, device.placeId, device.createdAt);
 
         return device;
     }
@@ -48,7 +50,7 @@ export class DeviceService {
         return discovered.filter((device: DiscoveredDevice) => !existingMDNS.has(device.id));
     }
 
-    updateDevice(id: string, name: string) {
+    updateDevice(id: string, name: string): Device {
         this.db.prepare('UPDATE devices SET name = ? WHERE id = ?').run(name, id);
         const result = this.db.prepare('SELECT * FROM devices WHERE id = ?').get(id);
         if (!result) throw new ModelNotFoundException(`Device with id ${id} not found`);
@@ -59,5 +61,12 @@ export class DeviceService {
         const result = this.db.prepare('DELETE FROM devices WHERE id = ?').run(id);
         if (result.changes === 0) throw new ModelNotFoundException(`Device with id ${id} not found`);
         return;
+    }
+
+    attachDeviceToPlace(id: string, placeId: string): Device {
+        this.db.prepare('UPDATE devices SET place_id = ? WHERE id = ?').run(placeId, id);
+        const result = this.db.prepare('SELECT * FROM devices WHERE id = ?').get(id);
+        if (!result) throw new ModelNotFoundException(`Device with id ${id} not found`);
+        return this.toDevice(result);
     }
 }

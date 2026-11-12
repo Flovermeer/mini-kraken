@@ -34,7 +34,11 @@ export interface Device {
     /**
      * 
      */
-    created_at: string;
+    placeId: string;
+    /**
+     * 
+     */
+    createdAt: string;
 }
 
 /**
@@ -44,7 +48,8 @@ export function instanceOfDevice(value: object): value is Device {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('name' in value) || value['name'] === undefined) return false;
     if (!('mDNS' in value) || value['mDNS'] === undefined) return false;
-    if (!('created_at' in value) || value['created_at'] === undefined) return false;
+    if (!('placeId' in value) || value['placeId'] === undefined) return false;
+    if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
     return true;
 }
 
@@ -61,7 +66,8 @@ export function DeviceFromJSONTyped(json: any, ignoreDiscriminator: boolean): De
         'id': json['id'],
         'name': json['name'],
         'mDNS': json['mDNS'],
-        'created_at': json['created_at'],
+        'placeId': json['placeId'],
+        'createdAt': json['createdAt'],
     };
 }
 
@@ -79,7 +85,8 @@ export function DeviceToJSONTyped(value?: Device | null, ignoreDiscriminator: bo
         'id': value['id'],
         'name': value['name'],
         'mDNS': value['mDNS'],
-        'created_at': value['created_at'],
+        'placeId': value['placeId'],
+        'createdAt': value['createdAt'],
     };
 }
 

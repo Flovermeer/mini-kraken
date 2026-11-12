@@ -3,7 +3,8 @@ required:
   - id
   - name
   - mDNS
-  - created_at
+  - placeId
+  - createdAt
 properties:
   id:
     type: string
@@ -12,6 +13,8 @@ properties:
     type: string
   mDNS:
     type: string
-  created_at:
+  placeId:
+    type: string
+  createdAt:
     type: string
     format: date-time

@@ -11,10 +11,13 @@ post:
           required:
             - id
             - name
+            - placeId
           properties:
             id:
               type: string
             name:
+              type: string
+            placeId:
               type: string
   responses:
     "201":

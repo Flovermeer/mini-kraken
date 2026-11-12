@@ -27,6 +27,10 @@ export interface PairDeviceRequest {
      * 
      */
     name: string;
+    /**
+     * 
+     */
+    placeId: string;
 }
 
 /**
@@ -35,6 +39,7 @@ export interface PairDeviceRequest {
 export function instanceOfPairDeviceRequest(value: object): value is PairDeviceRequest {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('placeId' in value) || value['placeId'] === undefined) return false;
     return true;
 }
 
@@ -50,6 +55,7 @@ export function PairDeviceRequestFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'id': json['id'],
         'name': json['name'],
+        'placeId': json['placeId'],
     };
 }
 
@@ -66,6 +72,7 @@ export function PairDeviceRequestToJSONTyped(value?: PairDeviceRequest | null, i
         
         'id': value['id'],
         'name': value['name'],
+        'placeId': value['placeId'],
     };
 }
 
