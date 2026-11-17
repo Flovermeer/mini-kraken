@@ -1,0 +1,20 @@
+<app-page>
+  <section class="ion-display-flex ion-flex-column ion-justify-content-center gap-4">
+    <h1 class="ion-text-center">{{ place().name }}</h1>
+
+    @if (!place().devices?.length) {
+      <ion-card class="ion-padding ion-display-flex ion-flex-column">
+        <p>Oups ! On dirait qu'il n'y a pas encore de cadres liés à ce lieu... En ajouter un ?</p>
+        <ion-button [routerLink]="'/create-device'">Ajouter un cadre</ion-button>
+      </ion-card>
+    } @else {
+      <ion-list>
+        @for (device of place().devices; track device.id) {
+          <ion-item>
+            {{ device.name }}
+          </ion-item>
+        }
+      </ion-list>
+    }
+  </section>
+</app-page>

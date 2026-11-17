@@ -1,0 +1,26 @@
+<app-page>
+  <section class="ion-display-flex ion-flex-column ion-justify-content-center gap-4">
+    <h1 class="ion-text-center">Créer un nouveau lieu</h1>
+
+    <ion-card>
+      <ion-card-content class="ion-no-margin">
+        Le lieu représente une pièce de l'habitation. Des cadres pourront y être attachés.
+      </ion-card-content>
+    </ion-card>
+
+    <form class="ion-display-flex ion-flex-column ion-justify-content-center gap-6" (submit)="onSubmit($event)">
+      <ion-input
+        [formField]="createPlaceForm.name"
+        label="Nom du lieu"
+        labelPlacement="stacked"
+        fill="outline"
+        placeholder="Salle à manger"
+      />
+
+
+      <ion-button class="ion-no-margin" type="submit">
+        Enregistrer
+      </ion-button>
+    </form>
+  </section>
+</app-page>

@@ -1,0 +1,29 @@
+<app-page>
+  <section class="ion-display-flex ion-flex-column ion-justify-content-center gap-4">
+    <h1 class="ion-text-center">Apairer un nouveau cadre</h1>
+
+    <ion-button
+      [disabled]="isDiscoveringDevices()"
+      (click)="startLookingForDevices()"
+    >
+      @if (isDiscoveringDevices()) {
+        <ion-spinner slot="start" name="crescent"></ion-spinner>
+      } @else {
+        Chercher des cadres
+      }
+    </ion-button>
+
+    <ion-list>
+      @for(device of discoveredDevices(); track device.id) {
+        <ion-item>
+          <ion-label>{{ device.name }}</ion-label>
+        </ion-item>
+      }
+    </ion-list>
+
+    @if (isDiscoveringDevices()) {
+      <ion-button color="danger" (click)="stopLookingForDevices()">Arrêter la découverte</ion-button>
+    }
+
+  </section>
+</app-page>

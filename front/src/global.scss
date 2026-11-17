@@ -35,3 +35,48 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/**
+ * Polices
+ * -----------------------------------------------------
+ * Embarquées dans l'app via Fontsource (paquets npm) plutôt que chargées depuis Google Fonts :
+ * l'app doit fonctionner sur le réseau local, même sans Internet.
+ * - Bungee : gros titres (titres de barre, h1 à h3)
+ * - Inconsolata : tout le reste du texte
+ */
+@import "@fontsource/bungee/latin.css";
+@import "@fontsource-variable/inconsolata/index.css";
+
+:root {
+  --ion-font-family: 'Inconsolata Variable', monospace;
+}
+
+ion-title,
+h1,
+h2,
+h3 {
+  font-family: 'Bungee', sans-serif;
+}
+
+/* Tailles des titres
+ * En rem : elles suivent la taille de texte réglée sur le téléphone (1rem = 16px par défaut).
+ * Le h1 reste un h1 pour la sémantique (accessibilité, lecteurs d'écran) : on réduit sa taille, pas son niveau.
+ */
+h1 { font-size: 1.25rem; }  /* 20px */
+h2 { font-size: 1.125rem; } /* 18px */
+h3 { font-size: 1rem; }     /* 16px */
+h4 { font-size: 0.875rem; } /* 14px */
+h5 { font-size: 0.75rem; }  /* 12px */
+h6 { font-size: 0.625rem; } /* 10px */
+
+/* Espacement entre les enfants d'un conteneur flex ou grid (Ionic n'a pas d'utilitaire gap)
+ * Même échelle que Tailwind : 1 unité = 0.25rem (4px par défaut)
+ */
+.gap-1 { gap: 0.25rem; } /* 4px */
+.gap-2 { gap: 0.5rem; }  /* 8px */
+.gap-4 { gap: 1rem; }    /* 16px */
+.gap-6 { gap: 1.5rem; }  /* 24px */
+
+.can-go-back > app-page > ion-header ion-back-button {
+  display: block;
+}

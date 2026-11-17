@@ -1,10 +1,24 @@
 import { Component } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular';
+import { IonApp, IonFab, IonFabButton, IonHeader, IonIcon, IonMenuToggle, IonRouterOutlet, IonTitle, IonToolbar } from '@ionic/angular';
+
+import { LayoutMenuComponent } from './features/layout/components/layout-menu/layout-menu.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [IonApp, IonRouterOutlet],
+  imports: [
+    IonApp,
+    IonRouterOutlet,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    LayoutMenuComponent,
+    IonFab,
+    IonFabButton,
+    IonIcon,
+    IonMenuToggle,
+  ],
+  styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
   constructor() {}

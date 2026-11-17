@@ -1,0 +1,13 @@
+<app-page>
+  <section class="ion-display-flex ion-flex-column ion-justify-content-center gap-4">
+    <h1 class="ion-text-center">Liste des lieux</h1>
+
+    <ion-list>
+      @for(place of places(); track place.id) {
+        <ion-item [routerLink]="`/${place.id}`" [detail]="true">
+          <ion-label>{{ place.name }}</ion-label>
+        </ion-item>
+      }
+    </ion-list>
+  </section>
+</app-page>

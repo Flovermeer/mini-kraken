@@ -1,2 +1,66 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+//
+// Chaque couleur Ionic se décline en 6 variables :
+// - la base, et sa version -rgb (pour les transparences : rgba(var(--ion-color-x-rgb), 0.5))
+// - -contrast (+ -rgb) : la couleur du texte posé dessus (noir ou blanc selon la lisibilité)
+// - -shade : la base assombrie de 12 % (état pressé)
+// - -tint : la base éclaircie de 10 % (état survolé)
+// Même calcul que le Color Generator de la doc Ionic.
+
+:root {
+  --ion-background-color: #eef2f6;
+  --ion-background-color-rgb: 238, 242, 246;
+
+  // Bleu : couleur principale (boutons par défaut, liens, FAB...)
+  --ion-color-primary: #00a8ff;
+  --ion-color-primary-rgb: 0, 168, 255;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #0094e0;
+  --ion-color-primary-tint: #1ab1ff;
+
+  // Ambre : couleur d'accent (à utiliser avec color="secondary")
+  --ion-color-secondary: #ffb000;
+  --ion-color-secondary-rgb: 255, 176, 0;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #e09b00;
+  --ion-color-secondary-tint: #ffb81a;
+
+  --ion-color-danger: #eb4d4b;
+  --ion-color-danger-rgb: 235, 77, 75;
+  --ion-color-danger-contrast: #000000;
+  --ion-color-danger-contrast-rgb: 0, 0, 0;
+  --ion-color-danger-shade: #cf4442;
+  --ion-color-danger-tint: #ed5f5d;
+
+  // Violet plutôt qu'orange : un orange se confondait avec l'ambre de secondary
+  --ion-color-warning: #8e44ad;
+  --ion-color-warning-rgb: 142, 68, 173;
+  --ion-color-warning-contrast: #ffffff;
+  --ion-color-warning-contrast-rgb: 255, 255, 255;
+  --ion-color-warning-shade: #7d3c98;
+  --ion-color-warning-tint: #9957b5;
+
+  --ion-color-success: #badc58;
+  --ion-color-success-rgb: 186, 220, 88;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #a4c24d;
+  --ion-color-success-tint: #c1e069;
+
+  --ion-color-dark: #130f40;
+  --ion-color-dark-rgb: 19, 15, 64;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #110d38;
+  --ion-color-dark-tint: #2b2753;
+
+  --ion-color-light: #dff9fb;
+  --ion-color-light-rgb: 223, 249, 251;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #c4dbdd;
+  --ion-color-light-tint: #e2fafb;
+}

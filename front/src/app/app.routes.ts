@@ -1,22 +1,36 @@
 import type { Routes } from '@angular/router';
 
-import { framesResolver } from './features/frames/resolvers/frames-resolver';
+import { framesResolver } from './features/frames/resolvers/frames.resolver';
+import { PlacesListComponent } from './features/places/places-list/places-list.component';
+import { placeResolver } from './features/places/resolvers/place.resolver';
+import { placesResolver } from './features/places/resolvers/places.resolver';
+
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./features/layout/layout.component').then((m) => m.LayoutComponent),
-    children: [
-      {
-        path: '',
-        loadComponent: () => import('./features/home/home.page').then(m => m.HomePage)
-      },
-      {
-        path: 'devices',
-        resolve: { frames: framesResolver },
-        loadComponent: () =>
-          import('./features/frames/frames-list/frames-list.component').then((m) => m.FramesListComponent),
-      },
-    ],
+    resolve: { places: placesResolver },
+    component: PlacesListComponent,
+  },
+  {
+    path: 'create-place',
+    loadComponent: () =>
+      import('./features/places/create-place/create-place.component').then((m) => m.CreatePlaceComponent),
+  },
+  {
+    path: 'create-device',
+    loadComponent: () => import('./features/frames/pair-frame/pair-frame.component').then((m) => m.PairFrameComponent),
+  },
+  {
+    path: 'devices',
+    resolve: { frames: framesResolver },
+    loadComponent: () =>
+      import('./features/frames/frames-list/frames-list.component').then((m) => m.FramesListComponent),
+  },
+  {
+    path: ':id',
+    resolve: { place: placeResolver },
+    loadComponent: () =>
+      import('./features/places/place-details/place-details.component').then((m) => m.PlaceDetailsComponent),
   },
 ];
