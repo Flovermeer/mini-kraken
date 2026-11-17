@@ -54,7 +54,7 @@ export default async function devicesRoutes(fastify: FastifyInstance, _options: 
     }, async (_request: FastifyRequest, reply: FastifyReply) => {
         try {
             devicesDetectorService.startDiscovery();
-            await reply.status(202).send("Discovery started");
+            await reply.status(202).send();
         } catch (error) {
             await reply.status(500).send("Failed to start discovery");
         }
@@ -65,7 +65,7 @@ export default async function devicesRoutes(fastify: FastifyInstance, _options: 
     }, async (_request, reply) => {
         try {
             devicesDetectorService.stopDiscovery();
-            await reply.status(202).send("Discovery stopped");
+            await reply.status(202).send();
         } catch (error) {
             await reply.status(500).send("Failed to stop discovery");
         }

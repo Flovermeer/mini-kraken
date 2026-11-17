@@ -5,10 +5,6 @@ post:
   responses:
     "202":
       description: Discovery started
-      content:
-        application/json:
-          schema:
-            type: string
 delete:
   operationId: stopDiscoveringDevices
   tags: [Devices]
@@ -16,10 +12,6 @@ delete:
   responses:
     "202":
       description: Discovery stopped
-      content:
-        application/json:
-          schema:
-            type: string
 get:
   operationId: getDiscoveredDevices
   tags: [Devices]
