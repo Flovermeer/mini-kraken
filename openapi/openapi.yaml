@@ -16,6 +16,8 @@ components:
       $ref: "./components/schemas/discovered-device.yaml"
     Place:
       $ref: "./components/schemas/place.yaml"
+    Thumbnail:
+      $ref: "./components/schemas/thumbnail.yaml"
     ApiError:
       $ref: "./components/schemas/api-error.yaml"
   responses:
@@ -23,9 +25,9 @@ components:
       $ref: "./components/responses/not-found.yaml"
 
 paths:
-  /photos:
+  /devices/{deviceId}/photos:
     $ref: "./paths/photos.yaml"
-  /photos/{id}:
+  /devices/{deviceId}/photos/{id}:
     $ref: "./paths/photo.yaml"
   /devices:
     $ref: "./paths/devices.yaml"

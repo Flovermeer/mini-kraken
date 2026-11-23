@@ -1,34 +1,37 @@
 import type {FastifyInstance, FastifyPluginOptions} from "fastify";
 import fs from "fs";
-import { randomUUID } from "node:crypto";
 import path from "node:path";
-import { pipeline } from "stream/promises";
 import { getAllowedMimeType, mimeTypeGuardFn } from "../guards/mime-type.guards.js";
+import {PhotosManagerService} from "../services/photos-manager.service.js";
+import {DeviceService} from "../services/device.service.js";
+import {getDb} from "../database/database.js";
 
 export default async function photosRoutes (fastify: FastifyInstance, _options: FastifyPluginOptions) {
     const dir = path.resolve(process.cwd(), 'uploads');
+    const deviceService = new DeviceService(getDb());
+    const photoManager = new PhotosManagerService();
     
-    fastify.post('/photos', async (request, reply) => {
+    fastify.post('/devices/:deviceId/photos', async (request, reply) => {
+        const { deviceId } = request.params as { deviceId: string };
         const data = await request.file();
-        const fileName = data?.filename;
 
         if (data?.file === undefined) {
-            reply.status(400).send({ message: 'No file uploaded' });
+            await reply.status(400).send({ error: 'No file uploaded' });
             return;
         }    
 
         if (!mimeTypeGuardFn(data.mimetype)) {
-            reply.status(400).send({ message: 'Invalid file type' });
+            await reply.status(400).send({ error: 'Invalid file type' });
             return;
         }
 
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
+        if (!deviceService.deviceExists(deviceId)) {
+            await reply.status(404).send({ error: 'Device not found' });
+            return;
         }
-    
-        const filePath = `${dir}/${randomUUID()}${data.mimetype.replace('/', '.')}`;
-        await pipeline(data.file, fs.createWriteStream(filePath));
-        reply.send({ message: 'File uploaded successfully', fileName });
+
+        await photoManager.handleUploadedPhoto(deviceId, await data.toBuffer());
+        await reply.status(201).send();
     });
 
     fastify.get('/photos/:id', (request, reply) => {

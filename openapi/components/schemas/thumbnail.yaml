@@ -1,0 +1,12 @@
+type: object
+required:
+  - id
+  - content
+properties:
+  id:
+    type: string
+    format: uuid
+  content:
+    description: base64 JPEG
+    type: string
+    format: byte

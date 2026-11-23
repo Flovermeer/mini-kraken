@@ -4,6 +4,7 @@ models/Device.ts
 models/DiscoveredDevice.ts
 models/PairDeviceRequest.ts
 models/Place.ts
+models/Thumbnail.ts
 models/UpdateDeviceRequest.ts
 models/UpdatePlaceRequest.ts
 runtime.ts

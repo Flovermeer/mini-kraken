@@ -23,7 +23,6 @@ export class DeviceService {
         } satisfies Device;
     }
 
-
     pairDevice(discovered: PairDeviceRequest): Device {
         const uuid = randomUUID();
         const device: Device = {
@@ -68,5 +67,9 @@ export class DeviceService {
         const result = this.db.prepare('SELECT * FROM devices WHERE id = ?').get(id);
         if (!result) throw new ModelNotFoundException(`Device with id ${id} not found`);
         return this.toDevice(result);
+    }
+
+    deviceExists(id: string): boolean {
+        return !!this.db.prepare('SELECT id FROM devices WHERE id = ?').get(id);
     }
 }

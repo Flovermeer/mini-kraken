@@ -1,3 +1,10 @@
+parameters:
+  - name: deviceId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
 post:
   operationId: uploadPhoto
   tags: [Photos]
@@ -15,12 +22,31 @@ post:
               type: string
               format: binary
   responses:
-    "200":
+    "201":
       description: Photo uploaded successfully
+    "400":
+      description: Invalid upload
+    "404":
+      $ref: "../components/responses/not-found.yaml"
+get:
+  operationId: getPhotoThumbnails
+  tags: [Photos]
+  summary: Retrieve a list of thumbnails
+  parameters:
+    - name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+  responses:
+    "200":
+      description: List of thumbnails
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
-    "400":
-      description: Invalid upload
+            type: array
+            items:
+              $ref: "../components/schemas/thumbnail.yaml"
+    "404":
+      $ref: "../components/responses/not-found.yaml"

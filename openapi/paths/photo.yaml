@@ -1,14 +1,20 @@
+parameters:
+  - name: deviceId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
 get:
   operationId: getPhotoById
   tags: [Photos]
   summary: Get a photo by UUID
-  parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
   responses:
     "200":
       description: Photo binary content
@@ -17,21 +23,14 @@ get:
           schema:
             type: string
             format: binary
-        image/png:
-          schema:
-            type: string
-            format: binary
-        image/webp:
-          schema:
-            type: string
-            format: binary
-        image/gif:
-          schema:
-            type: string
-            format: binary
-        image/bmp:
-          schema:
-            type: string
-            format: binary
     "404":
-      description: Photo not found
+      $ref: "../components/responses/not-found.yaml"
+delete:
+  operationId: removePhotoById
+  tags: [Photos]
+  summary: Delete a photo by UUID
+  responses:
+    "204":
+      description: Photo successfully removed
+    "404":
+      $ref: "../components/responses/not-found.yaml"
