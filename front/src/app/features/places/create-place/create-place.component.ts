@@ -1,5 +1,4 @@
 import { Component, inject, signal } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { form, FormField, required, minLength, applyWhenValue } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import { PlacesService } from '@api';
@@ -15,7 +14,7 @@ interface CreatePlace {
   selector: 'app-create-place',
   templateUrl: './create-place.component.html',
   styleUrls: ['./create-place.component.scss'],
-  imports: [ReactiveFormsModule, IonButton, IonInput, IonCardContent, IonCard, FormField, IonContent, AppPageComponent],
+  imports: [ IonButton, IonInput, IonCardContent, IonCard, FormField, IonContent, AppPageComponent],
 })
 export class CreatePlaceComponent {
   private readonly placeService = inject(PlacesService);

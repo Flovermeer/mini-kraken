@@ -18,10 +18,6 @@ export const routes: Routes = [
       import('./features/places/create-place/create-place.component').then((m) => m.CreatePlaceComponent),
   },
   {
-    path: 'create-device',
-    loadComponent: () => import('./features/frames/pair-frame/pair-frame.component').then((m) => m.PairFrameComponent),
-  },
-  {
     path: 'devices',
     resolve: { frames: framesResolver },
     loadComponent: () =>
@@ -29,8 +25,23 @@ export const routes: Routes = [
   },
   {
     path: ':id',
-    resolve: { place: placeResolver },
-    loadComponent: () =>
-      import('./features/places/place-details/place-details.component').then((m) => m.PlaceDetailsComponent),
+    children: [
+      {
+        path: '',
+        resolve: { place: placeResolver },
+        loadComponent: () =>
+          import('./features/places/place-details/place-details.component').then((m) => m.PlaceDetailsComponent),
+      },
+      {
+        path: 'create-device',
+        loadComponent: () =>
+          import('./features/frames/pair-frame/pair-frame.component').then((m) => m.PairFrameComponent),
+      },
+      {
+        path: 'device/:deviceId',
+        loadComponent: () =>
+          import('./features/frames/frame-details/frame-details.component').then((m) => m.FrameDetailsComponent),
+      },
+    ],
   },
 ];

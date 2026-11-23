@@ -5,7 +5,7 @@
     @if (!place().devices?.length) {
       <ion-card class="ion-padding ion-display-flex ion-flex-column">
         <p>Oups ! On dirait qu'il n'y a pas encore de cadres liés à ce lieu... En ajouter un ?</p>
-        <ion-button [routerLink]="'/create-device'">Ajouter un cadre</ion-button>
+        <ion-button [routerLink]="pairDevice()">Ajouter un cadre</ion-button>
       </ion-card>
     } @else {
       <ion-list>
@@ -17,4 +17,9 @@
       </ion-list>
     }
   </section>
+  @if (place().devices?.length) {
+    <footer class="ion-display-flex ion-justify-content-center">
+      <ion-button [routerLink]="pairDevice()" class="ion-m">Ajouter un cadre</ion-button>
+    </footer>
+  }
 </app-page>

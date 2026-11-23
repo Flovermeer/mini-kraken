@@ -8,7 +8,7 @@
       </ion-card-content>
     </ion-card>
 
-    <form class="ion-display-flex ion-flex-column ion-justify-content-center gap-6" (submit)="onSubmit($event)">
+    <form novalidate class="ion-display-flex ion-flex-column ion-justify-content-center gap-6" (submit)="onSubmit($event)">
       <ion-input
         [formField]="createPlaceForm.name"
         label="Nom du lieu"

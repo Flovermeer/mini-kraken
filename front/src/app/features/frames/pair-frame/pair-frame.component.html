@@ -15,7 +15,7 @@
 
     <ion-list>
       @for(device of discoveredDevices(); track device.id) {
-        <ion-item>
+        <ion-item (click)="openFormModal(device)">
           <ion-label>{{ device.name }}</ion-label>
         </ion-item>
       }
@@ -26,4 +26,31 @@
     }
 
   </section>
+
+  <ion-modal [isOpen]="isFormModalOpen()"
+             [initialBreakpoint]="0.5"
+             [breakpoints]="[0, 0.5, 0.85]"
+             [backdropDismiss]="false">
+
+    <ng-template>
+      <ion-content>
+        <ion-title class="ion-text-capitalize ion-text-center ion-padding-top">{{ selectedDevice()?.name }}</ion-title>
+        <form novalidate (submit)="onSubmit($event)" class="ion-display-flex ion-flex-column ion-align-items-center gap-4">
+          <ion-input [formField]="pairDeviceForm.name"
+          label="Nom du cadre"
+          label-placement="stacked"
+          fill="outline"
+          placeholder="{{ selectedDevice()?.name }}"></ion-input>
+
+          <div class="ion-display-flex gap-6">
+            <ion-button type="submit">Apairer le cadre</ion-button>
+            <ion-button color="danger" (click)="dismissFormModal()">Annuler</ion-button>
+          </div>
+
+        </form>
+      </ion-content>
+    </ng-template>
+
+
+  </ion-modal>
 </app-page>
