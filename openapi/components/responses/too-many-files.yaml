@@ -1,0 +1,5 @@
+description: Too many files
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/api-error.yaml"

@@ -89,4 +89,19 @@ describe('DeviceService', () => {
             expect(() => service.attachDeviceToPlace('inconnu', MAMIE)).toThrow(ModelNotFoundException);
         });
     });
+
+    describe('deviceExists', () => {
+        it('renvoie true pour un cadre appairé', () => {
+            const device = service.pairDevice({ id: 'frame-0001', name: 'Cuisine', placeId: MAISON });
+
+            expect(service.deviceExists(device.id)).toBe(true);
+        });
+
+        // C'est cette vérification qui protège l'upload : un id inconnu (ou forgé, comme "../../src")
+        // ne doit jamais atteindre le disque.
+        it('renvoie false pour un id inconnu ou forgé', () => {
+            expect(service.deviceExists('99999999-9999-9999-9999-999999999999')).toBe(false);
+            expect(service.deviceExists('../../src')).toBe(false);
+        });
+    });
 });

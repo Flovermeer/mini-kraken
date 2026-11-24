@@ -6,6 +6,7 @@ import sharp, { type OutputInfo, type ResizeOptions, type Sharp } from 'sharp';
 import type {ImageSharpOptions} from "../types/image-sharp-options.types.js";
 import {randomUUID} from "node:crypto";
 import {ImageNotStoredException} from "../exceptions/ImageNotStoredException.js";
+import {TooManyFilesException} from "../exceptions/TooManyFilesException.js";
 
 export class PhotosManagerService {
 
@@ -45,22 +46,28 @@ export class PhotosManagerService {
     }
 
     private storeFormattedImage(img: Sharp, filePath: string): Promise<OutputInfo> {
-         return img.toFile(filePath);
+         return img.jpeg().toFile(filePath);
     }
 
     async handleUploadedPhoto(deviceId: string, buffer: Buffer): Promise<void> {
         // resize photo
         const path = `${this.getDirectoryPath(deviceId)}`;
         const uuid = randomUUID();
-        const rawPhoto = this.resizeImage(buffer, this.PHOTO_SHARP_OPTIONS);
-        const rawThumbnail = this.resizeImage(buffer, this.THUMBNAIL_SHARP_OPTIONS);
         const photoDirPath = `${path}/${this.PHOTOS_DIR}`;
-        const photoPath = `${photoDirPath}/${uuid}`;
+        const photoPath = `${photoDirPath}/${uuid}.jpeg`;
         const thumbnailDirPath = `${path}/${this.THUMBNAILS_DIR}`;
-        const thumbnailPath = `${thumbnailDirPath}/${uuid}`;
+        const thumbnailPath = `${thumbnailDirPath}/${uuid}.jpeg`;
+
+        if (fs.existsSync(thumbnailDirPath)) {
+            const entries = await readdir(thumbnailDirPath, { withFileTypes: true });
+            if (entries.length >= 500) throw new TooManyFilesException("Too many photos.");
+        }
 
         // store photo
         try {
+            const rawPhoto = this.resizeImage(buffer, this.PHOTO_SHARP_OPTIONS);
+            const rawThumbnail = this.resizeImage(buffer, this.THUMBNAIL_SHARP_OPTIONS);
+
             if (!fs.existsSync(photoDirPath)) { fs.mkdirSync(photoDirPath, { recursive: true }); }
             if (!fs.existsSync(thumbnailDirPath)) { fs.mkdirSync(thumbnailDirPath, { recursive: true }); }
 
@@ -89,7 +96,7 @@ export class PhotosManagerService {
                 const fileStat = await stat(join(thumbnailsDir, name));
                 return { name, date: fileStat.mtimeMs }
             })
-        )
+        );
 
         entriesWithMetadata.sort((a, b) => b.date - a.date);
 

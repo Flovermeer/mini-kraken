@@ -28,6 +28,8 @@ post:
       description: Invalid upload
     "404":
       $ref: "../components/responses/not-found.yaml"
+    "409":
+      $ref: "../components/responses/too-many-files.yaml"
 get:
   operationId: getPhotoThumbnails
   tags: [Photos]
