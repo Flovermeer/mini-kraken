@@ -10,7 +10,7 @@
     } @else {
       <ion-list>
         @for (device of place().devices; track device.id) {
-          <ion-item>
+          <ion-item [routerLink]="goToFrame(device)" [queryParams]="{name: device.name}" [detail]="true">
             {{ device.name }}
           </ion-item>
         }

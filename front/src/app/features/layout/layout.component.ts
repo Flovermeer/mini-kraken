@@ -12,18 +12,6 @@ import { LayoutMenuComponent } from './components/layout-menu/layout-menu.compon
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   imports: [
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    RouterOutlet,
-    IonFabButton,
-    IonFab,
-    IonIcon,
-    LayoutMenuComponent,
-    IonMenuToggle,
-    IonButton,
-    IonMenuButton,
     IonRouterOutlet,
   ],
 })

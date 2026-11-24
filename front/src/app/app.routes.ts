@@ -1,5 +1,6 @@
 import type { Routes } from '@angular/router';
 
+import { frameResolver } from './features/frames/resolvers/frame.resolver';
 import { framesResolver } from './features/frames/resolvers/frames.resolver';
 import { PlacesListComponent } from './features/places/places-list/places-list.component';
 import { placeResolver } from './features/places/resolvers/place.resolver';
@@ -39,6 +40,7 @@ export const routes: Routes = [
       },
       {
         path: 'device/:deviceId',
+        resolve:  { thumbnails: frameResolver },
         loadComponent: () =>
           import('./features/frames/frame-details/frame-details.component').then((m) => m.FrameDetailsComponent),
       },

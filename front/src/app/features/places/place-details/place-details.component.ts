@@ -1,7 +1,7 @@
 import type { InputSignal } from '@angular/core';
 import  { computed, input, Component } from '@angular/core';
 import {RouterLink} from "@angular/router";
-import type { Place } from '@api';
+import type { Device, Place } from '@api';
 import { IonButton, IonCard, IonItem, IonList } from '@ionic/angular';
 
 import { AppPageComponent } from '../../app/app-page/app-page.component';
@@ -15,4 +15,8 @@ import { AppPageComponent } from '../../app/app-page/app-page.component';
 export class PlaceDetailsComponent {
   protected readonly place: InputSignal<Place> = input.required<Place>();
   protected readonly pairDevice = computed(() => `/${this.place().id}/create-device`);
+
+  protected goToFrame(device: Device): string {
+    return `/${this.place().id}/device/${device.id}`;
+  }
 }

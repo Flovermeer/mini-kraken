@@ -9,14 +9,14 @@ import { LayoutMenuComponent } from './features/layout/components/layout-menu/la
   imports: [
     IonApp,
     IonRouterOutlet,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    LayoutMenuComponent,
-    IonFab,
-    IonFabButton,
-    IonIcon,
-    IonMenuToggle,
+
+
+
+
+
+
+
+
   ],
   styleUrls: ['app.component.scss'],
 })

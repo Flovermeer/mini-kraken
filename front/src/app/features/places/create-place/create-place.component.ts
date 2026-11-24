@@ -14,7 +14,7 @@ interface CreatePlace {
   selector: 'app-create-place',
   templateUrl: './create-place.component.html',
   styleUrls: ['./create-place.component.scss'],
-  imports: [ IonButton, IonInput, IonCardContent, IonCard, FormField, IonContent, AppPageComponent],
+  imports: [ IonButton, IonInput, IonCardContent, IonCard, FormField, AppPageComponent],
 })
 export class CreatePlaceComponent {
   private readonly placeService = inject(PlacesService);

@@ -10,7 +10,7 @@ import { AppPageComponent } from '../../app/app-page/app-page.component';
   selector: 'app-places-list',
   templateUrl: './places-list.component.html',
   styleUrls: ['./places-list.component.scss'],
-  imports: [IonItem, IonLabel, IonList, RouterLink, IonContent, AppPageComponent],
+  imports: [IonItem, IonLabel, IonList, RouterLink, AppPageComponent],
 })
 export class PlacesListComponent {
   protected readonly places: InputSignal<Place[] | undefined> = input<Place[]>();
