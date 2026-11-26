@@ -9,7 +9,6 @@ import {
 } from '@angular/router';
 import { provideApi } from '@api';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
-import { addIcons } from 'ionicons';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';

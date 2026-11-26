@@ -121,13 +121,13 @@ describe('PhotosManagerService', () => {
             expect(Buffer.from(thumbnails[0]!.content, 'base64')).toEqual(onDisk);
         });
 
-        it('pagine par 10 : la page 2 contient les plus anciennes', async () => {
-            await createThumbnails(12);
+        it('pagine par 21 : la page 2 contient les plus anciennes', async () => {
+            await createThumbnails(23);
 
             const page1 = await service.getThumbnailsForDevice(DEVICE_ID, 1);
             const page2 = await service.getThumbnailsForDevice(DEVICE_ID, 2);
 
-            expect(page1).toHaveLength(10);
+            expect(page1).toHaveLength(21);
             expect(page2.map(t => t.id)).toEqual(['photo-01', 'photo-00']);
         });
     });

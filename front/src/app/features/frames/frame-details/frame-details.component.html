@@ -19,16 +19,29 @@
       @if (isLoading()) {
         <ion-spinner></ion-spinner>
       } @else {
-        Sélectionner des photos
+        Ajouter des photos
       }
     </ion-button>
-    <div class="infinite-scroll-content ion-display-flex ion-flex-column ion-align-items-center gap-6" role="feed">
-      @for (thumb of thumbnailsSync(); track thumb.id) {
-        <img [src]="'data:image/jpeg;base64,' + thumb.content" alt="" width="200" height="200" />
-      }
-    </div>
+    <ion-grid class="infinite-scroll-content ion-display-flex ion-flex-column gap-6" role="feed">
+      <ion-row>
+        @for (thumb of thumbnailsSync(); track thumb.id) {
+          <ion-col size="4" >
+            <img [src]="'data:image/jpeg;base64,' + thumb.content"
+                 (click)="openPhoto(thumb.id)"
+                 alt=""
+                 class="thumbnail-image"/>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)" [disabled]="isInfiniteScrollDisabled()">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </section>
 </app-page>
+<app-photo-gallery-modal
+  [(isOpen)]="isPhotoGalleryOpen"
+  [(selectedPhotoId)]="selectedPhoto"
+  [photoIds]="thumbnailsSync().map(t => t.id)"
+  (photoDeleted)="refreshThumbnails()"
+></app-photo-gallery-modal>

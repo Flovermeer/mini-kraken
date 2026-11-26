@@ -1,0 +1,31 @@
+<ion-modal [isOpen]="isOpen()" (didPresent)="scrollToSelectedPhoto()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar color="secondary">
+        <ion-buttons slot="end">
+          <ion-button (click)="dismiss()">Fermer</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <div class="strip" [class.hide]="!isPositioned()" #strip>
+        @for (id of photoIds(); track id) {
+          <img [src]="photoLink(id)" alt="" />
+        }
+      </div>
+    </ion-content>
+
+    <ion-footer class="ion-no-border">
+      <ion-toolbar class="ion-text-center">
+          <ion-button color="danger" [disabled]="isLoading()" (click)="removePhoto()">
+            @if (isLoading()) {
+              <ion-spinner></ion-spinner>
+            } @else {
+              <ion-icon name="trash"></ion-icon>
+            }
+          </ion-button>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-template>
+</ion-modal>

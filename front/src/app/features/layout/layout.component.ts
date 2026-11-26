@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { IonButton, IonContent, IonFab, IonFabButton, IonHeader, IonIcon,
-  IonMenuButton, IonMenuToggle, IonRouterOutlet, IonTitle, IonToolbar} from "@ionic/angular";
+import { IonRouterOutlet } from "@ionic/angular";
 import { addIcons } from 'ionicons';
 import { menuOutline} from 'ionicons/icons';
-
-import { LayoutMenuComponent } from './components/layout-menu/layout-menu.component';
 
 @Component({
   selector: 'app-layout',

@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { form, FormField, required, minLength, applyWhenValue } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import { PlacesService } from '@api';
-import { IonButton, IonCard, IonCardContent, IonContent, IonInput } from '@ionic/angular';
+import { IonButton, IonCard, IonCardContent, IonInput } from '@ionic/angular';
 
 import { AppPageComponent } from '../../app/app-page/app-page.component';
 

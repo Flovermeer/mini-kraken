@@ -54,20 +54,48 @@ export default async function photosRoutes (fastify: FastifyInstance, _options: 
         await reply.status(200).send(result);
     });
 
-    fastify.get('/photos/:id', (request, reply) => {
-        const { id } = request.params as { id: string };
-        const filePath = fs.readdirSync(dir).find(file => file.startsWith(id));
+    fastify.get('/devices/:deviceId/photos/:id', {
+        schema: {
+            params: {
+                type: 'object',
+                properties: {
+                    deviceId: { format: 'uuid', type: 'string' },
+                    id: { format: 'uuid', type: 'string' },
+                }
+            }
+        }
+    }, async (request, reply) => {
+        const { deviceId, id } = request.params as { deviceId: string, id: string };
 
-        if (filePath === undefined) {
-            reply.status(404).send({ message: 'File not found' });
+        if (!deviceService.deviceExists(deviceId)) {
+            await reply.status(404).send({ error: 'Device not found' });
             return;
         }
 
-        const fullPath = path.join(dir, filePath);
-        const stream = fs.createReadStream(fullPath);
+        const result = await photoManager.getPhotoForDevice(deviceId, id);
+        await reply.status(200).type('image/jpeg').send(result);
 
-        reply
-        .type(getAllowedMimeType(filePath))
-        .send(stream);
+    });
+
+    fastify.delete('/devices/:deviceId/photos/:id', {
+        schema: {
+            params: {
+                type: 'object',
+                properties: {
+                    deviceId: { format: 'uuid', type: 'string' },
+                    id: { format: 'uuid', type: 'string' },
+                }
+            }
+        }
+    }, async (request, reply) => {
+        const { deviceId, id } = request.params as { deviceId: string, id: string };
+
+        if (!deviceService.deviceExists(deviceId)) {
+            await reply.status(404).send({ error: 'Device not found' });
+            return;
+        }
+
+        await photoManager.removePhotoForDevice(deviceId, id);
+        await reply.status(204).send();
     });
 };

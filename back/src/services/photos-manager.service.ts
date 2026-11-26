@@ -7,10 +7,11 @@ import type {ImageSharpOptions} from "../types/image-sharp-options.types.js";
 import {randomUUID} from "node:crypto";
 import {ImageNotStoredException} from "../exceptions/ImageNotStoredException.js";
 import {TooManyFilesException} from "../exceptions/TooManyFilesException.js";
+import {ModelNotFoundException} from "../exceptions/ModelNotFoundException.js";
 
 export class PhotosManagerService {
 
-    private readonly THUMBNAILS_PER_PAGE = 10;
+    private readonly THUMBNAILS_PER_PAGE = 21;
     private readonly THUMBNAIL_SIZE = 200;
     private readonly IMAGE_WIDTH = 800;
     private readonly IMAGE_HEIGHT = 480;
@@ -114,9 +115,31 @@ export class PhotosManagerService {
     }
 
     // retourne une photo spécifique
-    getPhotoForDevice(deviceId: string, photoId: string) {
+    async getPhotoForDevice(deviceId: string, photoId: string) {
+        const photoPath = `${this.getDirectoryPath(deviceId)}/photos/${photoId}.jpeg`;
 
+        try {
+            return await readFile(photoPath);
+        } catch (error) {
+            if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+                throw new ModelNotFoundException("Could not find Photo");
+            }
+            throw error;
+        }
     }
 
-    removePhotoForDevice(deviceId: string, photoId: string) {}
+    async removePhotoForDevice(deviceId: string, photoId: string) {
+        const photoPath = `${this.getDirectoryPath(deviceId)}/${this.PHOTOS_DIR}/${photoId}.jpeg`;
+        const thumbnailPath = `${this.getDirectoryPath(deviceId)}/${this.THUMBNAILS_DIR}/${photoId}.jpeg`;
+
+        try {
+            await rm(thumbnailPath);
+            await rm(photoPath);
+        } catch (error) {
+            if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+                throw new ModelNotFoundException("Could not remove Photo");
+            }
+            throw error;
+        }
+    }
 }
