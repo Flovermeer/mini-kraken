@@ -12,3 +12,7 @@ uploads/
 # Divers
 *.log
 .DS_Store
+
+# Notes de contexte pour les agents IA (personnelles, non versionnées)
+CLAUDE.md
+.claude/
